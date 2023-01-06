@@ -18,4 +18,5 @@ Route::group(['controller' => PostController::class], function () {
     Route::get('/', 'index')->name('home');
     Route::get('/show/{post}', 'show')->name('show');
     Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
 });

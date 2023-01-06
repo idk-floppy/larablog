@@ -11,14 +11,11 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'teaser', 'content'];
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
-    }
-
-    public function scopeEverything(Builder $query)
-    {
-        return $query->with(['tags']);
     }
 
     public function scopeNewestFirst(Builder $query)

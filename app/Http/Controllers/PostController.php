@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostFormValidation;
 
 class PostController extends Controller
 {
@@ -15,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         return view('homepage', [
-            'posts' => Post::everything()->newestFirst()->paginate(12)
+            'posts' => Post::newestFirst()->paginate(12)
         ]);
     }
 
@@ -35,9 +36,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostFormValidation $request)
     {
-        //
+        Post::create($request->validated());
+        return redirect(route('home'));
     }
 
     /**

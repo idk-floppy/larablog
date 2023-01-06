@@ -7,7 +7,7 @@
             <x-block class="flex flex-col justify-between">
                 <div>
                     <x-post-title :url="route('show', $post->id)">{{ $post->title }}</x-post-title>
-                    <small class="text-sm text-gray-400 italic">2022.12.25</small>
+                    <small class="text-sm text-gray-400 italic">{{ $post->created_at->format('Y/m/d H:i') }}</small>
                     <hr>
                     <p>{{ $post->teaser }}</p>
                 </div>
