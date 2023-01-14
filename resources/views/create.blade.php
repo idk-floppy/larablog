@@ -9,22 +9,6 @@
             </x-text-input-field>
             <x-text-input-field name="teaser" id="teaser" pholder="Catchy teaser">
             </x-text-input-field>
-            {{-- <div><label for="title" class="capitalize">title</label>
-                <input type="text" name="title" id="title" placeholder="The name of your post"
-                    value="{{ old('title') ?? '' }}"
-                    class="mt-1 w-full block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                @if ($errors->has('title'))
-                    <small class="text-red-600">{{ $errors->first('title') }}</small>
-                @endif
-            </div> --}}
-            {{-- <div><label for="teaser" class="capitalize">teaser</label>
-                <input type="text" name="teaser" id="teaser" placeholder="Some teaser here"
-                    value="{{ old('teaser') ?? '' }}"
-                    class="mt-1 w-full block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                @if ($errors->has('teaser'))
-                    <small class="text-red-600">{{ $errors->first('teaser') }}</small>
-                @endif
-            </div> --}}
             <div><label for="content" class="capitalize">content</label>
                 <textarea name="content" id="content" cols="30" rows="10" placeholder="Write something..."
                     class="mt-1 w-full block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">{{ old('content') ?? '' }}</textarea>
@@ -35,8 +19,11 @@
             <div><label for="tags" class="capitalize">tags</label>
                 <select name="tags[]" id="tags" multiple
                     class="select2 mt-1 w-full block rounded-md bg-gray-100 border-transparent hover:border-gray-500 hover:bg-white hover:ring-0">
-                    <option value="test">test</option>
-                    <option value="hello">hello</option>
+                    @if (old('tags'))
+                        @foreach (old('tags') as $oldtag)
+                            <option value="{{ $oldtag }}" selected>{{ $oldtag }}</option>
+                        @endforeach
+                    @endif
                 </select>
                 @if ($errors->has('tags'))
                     <small class="text-red-600">{{ $errors->first('tags') }}</small>

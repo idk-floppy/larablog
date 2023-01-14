@@ -12,6 +12,8 @@ burger.on('click', () => {
 
 select2();
 
+
+
 $(window).on('load', () => {
     if ($(".select2").length) {
         $(".select2").select2({
@@ -29,21 +31,24 @@ $(window).on('load', () => {
                     return query;
                 },
                 processResults: (data) => {
-                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    var newData = $.map(data, (obj) => {
+                        obj.id = obj.text;
+                    });
+                    console.log(data);
                     return {
                         results: data
                     };
                 }
             },
             createTag: (params) => {
-                var regExp = /^[a-zA-Z0-9\ö\ü\ó\ő\ú\é\á\ű\Ö\Ü\Ó\Ő\Ú\É\Á\Ű\í\Í]+$/g;
+                var regExp = /^[a-zA-Z0-9\ö\ü\ó\ő\ú\é\á\ű\í]+$/g;
                 if (!regExp.test(params.term) || params.term.length > 16) {
                     return null;
                 }
 
                 return {
-                    id: params.term,
-                    text: params.term
+                    id: params.term.toLocaleLowerCase(),
+                    text: params.term.toLocaleLowerCase()
                 }
             }
         });
