@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostFormValidation;
@@ -38,7 +39,14 @@ class PostController extends Controller
      */
     public function store(PostFormValidation $request)
     {
-        Post::create($request->validated());
+        dd($request->tags);
+        $newpost = Post::create($request->validated());
+        $the_tags = [];
+        foreach ($request->tags as $tag) {
+            $temp_tag = Tag::insert(['text' => $tag]);
+            $the_tags . array_push($temp_tag);
+        }
+        $newpost->tags()->sync();
         return redirect(route('home'));
     }
 

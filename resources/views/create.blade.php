@@ -33,11 +33,10 @@
                 @endif
             </div>
             <div><label for="tags" class="capitalize">tags</label>
-                <select name="tags" id="tags[]"
-                    class="mt-1 w-full block rounded-md bg-gray-100 border-transparent hover:border-gray-500 hover:bg-white hover:ring-0">
+                <select name="tags[]" id="tags" multiple
+                    class="select2 mt-1 w-full block rounded-md bg-gray-100 border-transparent hover:border-gray-500 hover:bg-white hover:ring-0">
                     <option value="test">test</option>
-                    <option value="example">example</option>
-                    <option value="proba">proba</option>
+                    <option value="hello">hello</option>
                 </select>
                 @if ($errors->has('tags'))
                     <small class="text-red-600">{{ $errors->first('tags') }}</small>

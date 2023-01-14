@@ -40,6 +40,9 @@
                 <h3 class="font-semibold">Navigation</h3>
                 <ul class="pl-2">
                     <li>
+                        <div id="messenger"></div>
+                    </li>
+                    <li>
                         <x-nav-item href="{{ route('home') }}">Blog</x-nav-item>
                     </li>
                     @if (Route::has('admin'))

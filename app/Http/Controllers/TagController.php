@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+
+    public function search(Request $request)
+    {
+        return Tag::query()->where("text", "like", $request->search)->get();
+    }
     /**
      * Display a listing of the resource.
      *

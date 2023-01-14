@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Tag extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    public $fillable = ['text'];
 
     public function posts()
     {
