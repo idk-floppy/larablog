@@ -18,9 +18,9 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->text(rand(10, 64)),
-            'teaser' => $this->faker->text(rand(10, 128)),
+            'teaser' => $this->faker->realText(rand(10, 128)),
             'content' => $this->faker->paragraphs(rand(1, 5), true),
-            'created_at' => $this->faker->dateTimeBetween('-5 years', '-5 days'),
+            'created_at' => $this->faker->dateTimeBetween('-5 years', '-3 days'),
         ];
     }
 }

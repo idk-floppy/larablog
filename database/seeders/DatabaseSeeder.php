@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         Post::all()->each(function ($post) use ($tags) {
             $post->tags()->sync(
-                $tags->random(rand(1, 3))->pluck('id')->toArray()
+                $tags->random(rand(0, 3))->pluck('id')->toArray()
             );
         });
     }

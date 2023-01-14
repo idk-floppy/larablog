@@ -10,7 +10,11 @@ class TagController extends Controller
 
     public function search(Request $request)
     {
-        return Tag::query()->where("text", "like", $request->search)->get();
+        $tags = Tag::query();
+        if ($request->has('search')) {
+            $tags->where('text', 'like', '%' . $request->search . '%');
+        }
+        return $tags->get();
     }
     /**
      * Display a listing of the resource.

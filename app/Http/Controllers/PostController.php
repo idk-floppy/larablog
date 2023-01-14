@@ -39,14 +39,14 @@ class PostController extends Controller
      */
     public function store(PostFormValidation $request)
     {
-        dd($request->tags);
         $newpost = Post::create($request->validated());
-        $the_tags = [];
-        foreach ($request->tags as $tag) {
-            $temp_tag = Tag::insert(['text' => $tag]);
-            $the_tags . array_push($temp_tag);
+        if ($request->has('tags')) {
+            $st = $request->tags; // get the tags from submitted form
+            foreach ($st as $ftag) {
+                $ptag = Tag::firstOrCreate(['text' => $ftag]); // go through each tag, create them or get their id if they exist
+                $newpost->tags()->attach($ptag); // attach the tags
+            }
         }
-        $newpost->tags()->sync();
         return redirect(route('home'));
     }
 
