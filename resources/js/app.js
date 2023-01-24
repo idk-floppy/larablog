@@ -42,7 +42,7 @@ $(window).on('load', () => {
             },
             createTag: (params) => {
                 var regExp = /^[a-zA-Z0-9\ö\ü\ó\ő\ú\é\á\ű\í]+$/g;
-                if (!regExp.test(params.term) || params.term.length > 16) {
+                if (!regExp.test(params.term) || params.term.length > 32) {
                     return null;
                 }
 

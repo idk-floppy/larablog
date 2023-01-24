@@ -1,10 +1,13 @@
 # larablog
 
-commands to run before using the app
+## commands to run before using the app
 
-AUTOMATIC: run `run.bat`, so it automatically runs the needed commands.
+### AUTOMATIC
 
-MANUAL:
+run `clean.bat`, so it automatically runs the needed commands.
+
+### MANUAL
+
 Copy `env.example` and renamte it to `.env`
 
 Run `composer install` and `npm install`.

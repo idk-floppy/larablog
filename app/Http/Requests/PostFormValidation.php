@@ -24,9 +24,10 @@ class PostFormValidation extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:6|max:255|unique:posts',
+            'title' => 'required|min:2|max:255|unique:posts',
             'teaser' => 'max:255',
-            'content' => 'max:50000|required'
+            'content' => 'max:50000|required',
+            'tags.*' => 'string|min:3|max:32|regex:/^[a-z0-9\ö\ü\ó\ő\ú\é\á\ű\í]/',
         ];
     }
 }

@@ -4,6 +4,13 @@
 @section('body')
     <x-block>
         <form method="post" action="{{ route('store') }}">
+            @if ($errors->any())
+                <div class="p-4 w-full block rounded-md bg-white">
+                    <ul>
+                        {!! implode('', $errors->all('<li class="text-red-600">:message</li>')) !!}
+                    </ul>
+                </div>
+            @endif
             @csrf
             <x-text-input-field name="title" id="title" pholder="Amazing title">
             </x-text-input-field>
