@@ -88,3 +88,50 @@ You could also use `CTRL + F5` to refresh the browser.
 - [ ] add livewire
 - [ ] switch components to vue components
 - [ ] "estimated read time" calculator ()
+
+
+# MAPS
+
+### SITE MAP&FUNCTIONALITIES
+
+```mermaid
+graph TB
+
+homepage["Homepage"]
+admin["Admin"]
+show["Show (read) posts"]
+create["Create posts"]
+edit["Edit posts"]
+delete["Delete posts"]
+list["List posts"]
+
+homepage --"List and read posts"-->show
+homepage --"Create new post"-->create
+admin --"List posts (via datatables)"-->list-->adminFunctions{"Admin Functions"}
+
+adminFunctions--"Create"-->create
+adminFunctions--"Edit"-->edit
+adminFunctions--"Delete"-->delete
+```
+
+### PROCESS OF POST CREATION
+
+```mermaid
+graph TB
+
+start["Open the New Post page"]
+create["Create post form"]
+validate{"Validate submitted data"}
+errors["Collect errors"]
+make_post["Create post with validated data"]
+make_tag["Create tag(s) with validated data"]
+sync_pt["Sync post with validated tags"]
+home["Return to homepage"]
+
+start -.-> create
+create--"Submit form"--->validate
+
+validate--"FAIL"-->errors--"return error messages to the user"-->create
+validate--"SUCCEED"-->make_post
+make_post-->make_tag-->sync_pt-->home
+```
