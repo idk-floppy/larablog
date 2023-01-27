@@ -16,6 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['controller' => TagController::class], function () {
-    Route::get('/', 'index')->name('all_tags');
     Route::get('/search', 'search')->name('search');
 });

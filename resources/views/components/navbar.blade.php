@@ -16,12 +16,10 @@
                 @if (Route::has('create'))
                     <x-nav-item href="{{ route('create') }}">New post</x-nav-item>
                 @endif
+                @if (Route::has('admin'))
+                    <x-nav-item href="{{ route('home') }}">Admin</x-nav-item>
+                @endif
             </div>
         </div>
-        {{-- <div class="hidden md:flex space-x-3">
-            @if (Route::has('admin'))
-                <x-nav-item href="{{ route('home') }}">Admin</x-nav-item>
-            @endif
-        </div> --}}
     </div>
 </nav>

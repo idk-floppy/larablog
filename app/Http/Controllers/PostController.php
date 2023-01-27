@@ -41,10 +41,10 @@ class PostController extends Controller
     {
         $newpost = Post::create($request->validated());
         if ($request->has('tags')) {
-            $st = $request->tags; // get the tags from submitted form
+            $st = $request->tags; // get the tags from submitted form. $st -> submittedTags
             foreach ($st as $ftag) {
-                $ptag = Tag::firstOrCreate(['text' => $ftag]); // go through each tag, create them or get their id if they exist
-                $newpost->tags()->attach($ptag); // attach the tags
+                $ptag = Tag::firstOrCreate(['text' => $ftag]); // $ftag -> fetchedTags, $ptag -> preferredTags
+                $newpost->tags()->attach($ptag); // attach the preferred tags
             }
         }
         return redirect(route('home'));

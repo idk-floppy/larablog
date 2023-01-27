@@ -16,9 +16,7 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        // $newTitle = $this->faker->text(rand(10, 255)) . $this->faker->randomDigit() . $this->faker->word();
         return [
-            // 'title' => $newTitle,
             'title' => $this->faker->text(rand(10, 255)),
             'teaser' => $this->faker->realText(rand(10, 128)),
             'content' => $this->faker->paragraphs(rand(1, 5), true),
