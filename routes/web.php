@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['controller' => PostController::class], function () {
+Route::group(['controller' => PostController::class, 'as' => 'blog.'], function () {
     Route::get('/', 'index')->name('home');
     Route::get('/show/{post}', 'show')->name('show');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{post}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete/{post}', 'destroy')->name('destroy');
 });

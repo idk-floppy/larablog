@@ -15,4 +15,6 @@ START /B /WAIT CMD /c php artisan cache:clear
 echo Cache deleted
 START /B /WAIT CMD /C php artisan key:generate
 echo New key generated
-START /B CMD /c php artisan serve
+START /B /WAIT CMD /C php artisan route:clear
+echo Route list cleared
+echo Now you can go ahead and run 'php artisan serve'

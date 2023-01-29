@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Parsedown;
 use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PostFormValidation;
 
 class PostController extends Controller
@@ -39,15 +41,17 @@ class PostController extends Controller
      */
     public function store(PostFormValidation $request)
     {
-        $newpost = Post::create($request->validated());
-        if ($request->has('tags')) {
-            $st = $request->tags; // get the tags from submitted form. $st -> submittedTags
-            foreach ($st as $ftag) {
-                $ptag = Tag::firstOrCreate(['text' => $ftag]); // $ftag -> fetchedTags, $ptag -> preferredTags
-                $newpost->tags()->attach($ptag); // attach the preferred tags
-            }
+        DB::beginTransaction();
+        try {
+            $newPost = Post::create($request->validated());
+            $newPost->refreshTags($request->tags ?? []);
+            $commit = true;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500);
         }
-        return redirect(route('home'));
+        DB::commit();
+        return redirect(route('blog.show', $newPost->id))->with('success', 'Post created successfully');
     }
 
     /**
@@ -58,8 +62,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $Parsedown = new Parsedown();
+        $safeContent = $Parsedown->text($post->content);
+
         return view('show', [
-            'post' => $post
+            'post' => $post,
+            'content' => $safeContent
         ]);
     }
 
@@ -71,7 +79,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('edit', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -81,9 +91,19 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostFormValidation $request, Post $post)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $post = $post->find($request->uid);
+            $post->update($request->validated());
+            $post->refreshTags($request->tags ?? []);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500);
+        }
+        DB::commit();
+        return redirect(route('blog.show', $post->id))->with('success', 'Post updated successfully');
     }
 
     /**
@@ -94,6 +114,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $post->tags()->sync([]);
+            $post->delete();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500);
+        }
+        DB::commit();
+        return redirect(route('blog.home'))->with('success', 'Post deleted successfully');
     }
 }

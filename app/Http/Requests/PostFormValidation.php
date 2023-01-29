@@ -27,6 +27,7 @@ class PostFormValidation extends FormRequest
             'title' => 'required|min:2|max:255',
             'teaser' => 'max:255',
             'content' => 'max:50000|required',
+            'tags' => 'max:3',
             'tags.*' => 'string|min:3|max:32|regex:/^[a-z0-9\ö\ü\ó\ő\ú\é\á\ű\í]/',
         ];
     }

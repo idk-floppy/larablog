@@ -3,7 +3,8 @@
 
 @section('body')
     <x-block>
-        <form method="post" action="{{ route('blog.store') }}">
+        <form method="post" action="{{ route('blog.update') }}">
+            <input type="hidden" name="uid" value="{{ $post->id }}">
             @if ($errors->any())
                 <div class="p-4 w-full block rounded-md bg-white">
                     <ul>
@@ -13,12 +14,14 @@
             @endif
             @csrf
             <x-text-input-field name="title" id="title" pholder="Amazing title">
+                {{ $post->title }}
             </x-text-input-field>
             <x-text-input-field name="teaser" id="teaser" pholder="Catchy teaser">
+                {{ $post->teaser }}
             </x-text-input-field>
             <div><label for="content" class="capitalize">content</label>
                 <textarea name="content" id="content" cols="30" rows="10" placeholder="Write something..."
-                    class="mt-1 w-full block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">{{ old('content') ?? '' }}</textarea>
+                    class="mt-1 w-full block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">{{ $post->content ?? old('content') }}</textarea>
                 @if ($errors->has('content'))
                     <small class="text-red-600">{{ $errors->first('content') }}</small>
                 @endif
@@ -29,6 +32,10 @@
                     @if (old('tags'))
                         @foreach (old('tags') as $oldtag)
                             <option value="{{ $oldtag }}" selected>{{ $oldtag }}</option>
+                        @endforeach
+                    @elseif ($post->tags()->count() > 0)
+                        @foreach ($post->tags as $singleTag)
+                            <option value="{{ $singleTag->text }}" selected>{{ $singleTag->text }}</option>
                         @endforeach
                     @endif
                 </select>

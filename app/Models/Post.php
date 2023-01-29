@@ -22,4 +22,17 @@ class Post extends Model
     {
         return $query->orderBy('created_at', 'DESC');
     }
+
+    public function refreshTags(array $tags)
+    {
+        try {
+            $this->tags()->sync([]); // remove every connection
+            foreach (array_unique($tags) as $fetchedTags) {
+                $preferredTags = Tag::firstOrCreate(['text' => $fetchedTags]); // $fetchedTags -> fetchedTags, $preferredTags -> preferredTags
+                $this->tags()->attach($preferredTags); // attach the preferred tags
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }

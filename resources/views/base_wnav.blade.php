@@ -14,6 +14,7 @@
 
     <div class="container sm:mx-auto my-2 p-4">
         <h1 class="text-3xl capitalize py-2">{{ $stitle ?? '' }}</h1>
+        <x-flash-message />
         @yield('body')
     </div>
 
@@ -40,22 +41,15 @@
                 <h3 class="font-semibold">Navigation</h3>
                 <ul class="pl-2">
                     <li>
-                        <div id="messenger"></div>
+                        <x-nav-item href="{{ route('blog.home') }}">Blog</x-nav-item>
                     </li>
-                    <li>
-                        <x-nav-item href="{{ route('home') }}">Blog</x-nav-item>
-                    </li>
-                    @if (Route::has('admin'))
-                        <li>
-                            <x-nav-item href="{{ route('home') }}">Admin</x-nav-item>
-                        </li>
-                    @endif
                 </ul>
             </div>
         </div>
     </div>
 
     @vite('resources/js/app.js')
+    @yield('scripts')
 </body>
 
 </html>

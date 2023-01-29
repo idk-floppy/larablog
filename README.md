@@ -35,51 +35,50 @@ You could also use `CTRL + F5` to refresh the browser.
 - [x] Post
   - [x] B (R)
   - [x] R (R)
-  - [ ] E (U)
+  - [x] E (U)
   - [x] A (C)
-  - [ ] D (D)
+  - [x] D (D)
 - [ ] TAG
   - [x] B (R) (api)
   - [x] R (R) (api)
-  - [ ] E (U) (soon)
-  - [x] A (C) 
-  - [ ] D (D) (soon)
+  - [ ] E (U)
+  - [x] A (C)
+  - [ ] D (D)
 - [x] blade templates
   - [x] base template
   - [x] nav template
   - [x] homepage
   - [x] show (singular post read template)
   - [x] create (post creation template)
+  - [x] update (post update template)
+  - [x] delete (dialog)
   - [x] all with some basic style
-- [ ] Create posts
+- [x] Create posts
   - [x] base form
   - [x] validation
   - [x] select2
     - [x] custom tag search method :: api for search
   - [x] error messages & old data
-  - [ ] WYSIWYG editor: probably CK Editor
-- [x] Items to components (some of them)
+  - [x] WYSIWYG editor: markdown editor
+- [ ] Items to components (some of them)
   - [x] card/block
     - [x] post title item
     - [x] post tag item (capsule/pill)
-    - [ ] text input field item with label
+    - [ ] input fields
   - [x] navbar
     - [x] navbar item
 - [ ] List posts
   - [x] listing
   - [ ] search in title and filter tags (only existing ones)
   - [x] Pagination
-- [ ] Admin panel
-  - [ ] list posts
-  - [ ] datatables
-    - [ ] function buttons
-      - [ ] edit posts
-      - [ ] delete posts
-      - [ ] modals (sweetalert, only for deletion confirmation)
+- [x] Admin
+    - [x] edit posts
+    - [x] delete posts
+    - [x] modals (dialog+js, later sweetalert maybe?)
 
 ### POST MVP
 
-- [ ] separate select2 js to component
+- [ ] refactor
 
 ### OPTIONAL
 

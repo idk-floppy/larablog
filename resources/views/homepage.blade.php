@@ -6,7 +6,7 @@
         @forelse ($posts as $post)
             <x-block class="flex flex-col justify-between">
                 <div>
-                    <x-post-title :url="route('show', $post->id)">{{ $post->title }}</x-post-title>
+                    <x-post-title :url="route('blog.show', $post->id)">{{ $post->title }}</x-post-title>
                     <small class="text-sm text-gray-400 italic">{{ $post->created_at->format('Y/m/d H:i') }}</small>
                     <hr>
                     <div class="text-gray-700 mb-4">{{ $post->teaser }}</div>
