@@ -69,7 +69,9 @@ You could also use `CTRL + F5` to refresh the browser.
     - [x] navbar item
 - [ ] List posts
   - [x] listing
-  - [ ] search in title and filter tags (only existing ones)
+  - [ ] search in
+    - [x] post fields
+    - [ ] filter tags
   - [x] Pagination
 - [x] Admin
     - [x] edit posts
@@ -78,7 +80,7 @@ You could also use `CTRL + F5` to refresh the browser.
 
 ### POST MVP
 
-- [ ] refactor
+- [ ] clean-up
 
 ### OPTIONAL
 

@@ -18,8 +18,11 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::query()->with('tags')->when(request('q'), function ($q) {
+            return $q->searchMain(request('q'));
+        });
         return view('homepage', [
-            'posts' => Post::newestFirst()->paginate(12)
+            'posts' => $posts->newestFirst()->paginate(12)
         ]);
     }
 

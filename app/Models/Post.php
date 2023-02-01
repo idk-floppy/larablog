@@ -23,6 +23,11 @@ class Post extends Model
         return $query->orderBy('created_at', 'DESC');
     }
 
+    public function scopeSearchMain(Builder $query, $q)
+    {
+        return $query->where('title', 'like', '%' . $q . '%')->orWhere('teaser', 'like', '%' . $q . '%')->orWhere('content', 'like', '%' . $q . '%');
+    }
+
     public function refreshTags(array $tags)
     {
         try {

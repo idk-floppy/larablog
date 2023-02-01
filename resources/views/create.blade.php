@@ -12,9 +12,9 @@
                 </div>
             @endif
             @csrf
-            <x-text-input-field name="title" id="title" pholder="Amazing title">
+            <x-text-input-field name="title" id="title" label="Title" pholder="Amazing title">
             </x-text-input-field>
-            <x-text-input-field name="teaser" id="teaser" pholder="Catchy teaser">
+            <x-text-input-field name="teaser" id="teaser" label="Teaser" pholder="Catchy teaser">
             </x-text-input-field>
             <div><label for="content" class="capitalize">content</label>
                 <textarea name="content" id="content" cols="30" rows="10" placeholder="Write something..."
@@ -37,8 +37,7 @@
                 @endif
             </div>
             <div class="mt-1 flex gap-3">
-                <input type="submit" value="save"
-                    class="rounded-md border-transparent bg-orange-200 hover:bg-orange-400 p-2 text-white font-semibold uppercase">
+                <x-default-button value="Search" />
             </div>
         </form>
     </x-block>

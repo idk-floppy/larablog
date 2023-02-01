@@ -3,6 +3,15 @@
 
 @section('body')
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <x-block class="col-span-1 md:col-span-2 lg:col-span-3 px-2 py-2 my-2">
+            <form action="{{ route('blog.home') }}" method="get">
+                <div class="grid grid-cols-4 gap-2">
+                    <x-text-input-field name="q" id="q" class="col-span-3" pholder="Search..."
+                        :value="request('q')" />
+                    <x-default-button value="Search" />
+                </div>
+            </form>
+        </x-block>
         @forelse ($posts as $post)
             <x-block class="flex flex-col justify-between">
                 <div>

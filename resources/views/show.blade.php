@@ -13,7 +13,7 @@
             </form>
         </x-block>
     </dialog>
-    <x-block class="bg-white rounded-md p-4">
+    <x-block class="bg-white rounded-md p-4 block">
         <div class="flex flex-col justify-between">
             <div class="flex space-x-2">
                 @forelse ($post->tags as $tag)

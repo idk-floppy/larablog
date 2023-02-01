@@ -9,16 +9,18 @@ class TextInputField extends Component
     public $name;
     public $id;
     public $pholder;
+    public $label;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $id, $pholder)
+    public function __construct($name, $id, $pholder, $label = '')
     {
         $this->name = $name;
         $this->id = $id;
         $this->pholder = $pholder;
+        $this->label = $label;
     }
 
     /**
