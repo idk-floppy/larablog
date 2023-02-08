@@ -12,17 +12,10 @@
                 </div>
             @endif
             @csrf
-            <x-text-input-field name="title" id="title" label="Title" pholder="Amazing title">
-            </x-text-input-field>
-            <x-text-input-field name="teaser" id="teaser" label="Teaser" pholder="Catchy teaser">
-            </x-text-input-field>
-            <div><label for="content" class="capitalize">content</label>
-                <textarea name="content" id="content" cols="30" rows="10" placeholder="Write something..."
-                    class="mt-1 w-full block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">{{ old('content') ?? '' }}</textarea>
-                @if ($errors->has('content'))
-                    <small class="text-red-600">{{ $errors->first('content') }}</small>
-                @endif
-            </div>
+            <x-text-input-field name="title" id="title" label="Title" pholder="Amazing title"></x-text-input-field>
+            <x-text-input-field name="teaser" id="teaser" label="Teaser" pholder="Catchy teaser"></x-text-input-field>
+            <x-long-text-field name="content" id="content" label="Content" pholder="Write something...">
+            </x-long-text-field>
             <div><label for="tags" class="capitalize">tags</label>
                 <select name="tags[]" id="tags" multiple
                     class="select2 mt-1 w-full block rounded-md bg-gray-100 border-transparent hover:border-gray-500 hover:bg-white hover:ring-0">
