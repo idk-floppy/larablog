@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreatePostAction;
 use Parsedown;
 use App\Models\Tag;
 use App\Models\Post;
@@ -42,19 +43,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostFormValidation $request)
+    public function store(PostFormValidation $request, CreatePostAction $action)
     {
-        DB::beginTransaction();
-        try {
-            $newPost = Post::create($request->validated());
-            $newPost->refreshTags($request->tags ?? []);
-            $commit = true;
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500);
+        $response = $action->handle($request);
+
+        if ($response['success']) {
+            return redirect(route('blog.show', $response['msg']->id))->with('success', 'Post created successfully');
+        } else {
+            return $response['msg'];
         }
-        DB::commit();
-        return redirect(route('blog.show', $newPost->id))->with('success', 'Post created successfully');
     }
 
     /**

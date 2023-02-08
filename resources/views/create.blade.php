@@ -30,7 +30,7 @@
                 @endif
             </div>
             <div class="mt-1 flex gap-3">
-                <x-default-button value="Search" />
+                <x-default-button value="Save" />
             </div>
         </form>
     </x-block>
