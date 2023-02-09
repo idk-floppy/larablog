@@ -1,7 +1,11 @@
 <div>
     <select name="tags[]" id="tags" multiple
         class="select2 mt-1 w-full block rounded-md bg-gray-100 border-transparent hover:border-gray-500 hover:bg-white hover:ring-0">
-        @if (old('tags'))
+        @foreach ($this->tagOptions as $tagOptions)
+            <option value="{{ $tagOptions }}" selected>{{ $tagOptions }}</option>
+        @endforeach
+
+        {{-- @if (old('tags'))
             @foreach (old('tags') as $oldtag)
                 <option value="{{ $oldtag }}" selected>{{ $oldtag }}</option>
             @endforeach
@@ -13,7 +17,7 @@
                     @endforeach
                 @endif
             @endisset
-        @endif
+        @endif --}}
     </select>
     @if ($errors->has('tags'))
         <small class="text-red-600">{{ $errors->first('tags') }}</small>
