@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog</title>
     @vite('resources/css/app.css')
+    @livewireStyles
 </head>
 
 <body class="bg-gray-100 flex flex-col h-screen justify-between">
@@ -49,7 +50,8 @@
     </div>
 
     @vite('resources/js/app.js')
-    @yield('scripts')
+    @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>
