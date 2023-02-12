@@ -2,7 +2,7 @@
     <x-block @class([
         'text-green-700 my-2' => Session::get('success'),
     ])>
-        <p>{{ _($message) }}</p>
+        <p>{{ $message }}</p>
     </x-block>
 @endif
 
@@ -10,6 +10,6 @@
     <x-block @class([
         'text-red-700 my-2' => Session::get('error'),
     ])>
-        <p>{{ _($message) }}</p>
+        <p>{{ $message }}</p>
     </x-block>
 @endif

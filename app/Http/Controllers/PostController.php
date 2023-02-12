@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreatePostAction;
+use App\Actions\DeletePostAction;
+use App\Actions\UpdatePostAction;
 use Parsedown;
 use App\Models\Tag;
 use App\Models\Post;
@@ -91,19 +93,15 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostFormValidation $request, Post $post)
+    public function update(PostFormValidation $request, UpdatePostAction $action)
     {
-        DB::beginTransaction();
-        try {
-            $post = $post->find($request->uid);
-            $post->update($request->validated());
-            $post->refreshTags($request->tags ?? []);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500);
+        $response = $action->handle($request);
+
+        if ($response['success']) {
+            return redirect(route('blog.show', $response['msg']->id))->with('success', 'Post updated successfully');
+        } else {
+            return $response['msg'];
         }
-        DB::commit();
-        return redirect(route('blog.show', $post->id))->with('success', 'Post updated successfully');
     }
 
     /**
@@ -112,17 +110,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post, DeletePostAction $action)
     {
-        DB::beginTransaction();
-        try {
-            $post->tags()->sync([]);
-            $post->delete();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500);
-        }
-        DB::commit();
-        return redirect(route('blog.home'))->with('success', 'Post deleted successfully');
+        $response = $action->handle($post);
+        return response()->json(['success' => 'Post successfully deleted!', 'url' => route('blog.home')]);
     }
 }

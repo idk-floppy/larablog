@@ -2,17 +2,6 @@
 
 
 @section('body')
-    <dialog id="dialog">
-        <x-block class="w-2/5 mx-auto">
-            <h3>Delete post?</h3>
-            <form action="{{ route('blog.destroy', $post->id) }}" method="POST">
-                @csrf
-                <input type="hidden" name="uid" value="{{ $post->id }}">
-                <input type="submit" id="confirm" value="Delete" class="m-2 p-2 bg-red-600 text-white rounded-md">
-                <input type="button" id="cancel" value="Nevermind" class="m-2 p-1 bg-white text-orange-600">
-            </form>
-        </x-block>
-    </dialog>
     <x-block class="bg-white rounded-md p-4 block">
         <div class="flex flex-col justify-between">
             <div class="flex space-x-2">
@@ -30,7 +19,7 @@
                 <small class="text-sm text-gray-400 italic">Created at {{ $post->created_at->format('Y M d.') }}</small>
                 <hr class="my-2 border-gray-300">
                 <a href="{{ route('blog.edit', $post->id) }}">Edit</a>
-                <a id="delete">Delete</a>
+                <x-delete-modal :post="$post" />
             </div>
         </div>
     </x-block>

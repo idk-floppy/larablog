@@ -16,6 +16,8 @@
             forceSync: true,
             element: document.getElementById(""+@this.tid)
         });
+
+        // In case it shits itself...
         easyMDE.codemirror.on('change', ()=>{
             document.getElementById(""+@this.tid).value = easyMDE.value();
         });

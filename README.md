@@ -136,3 +136,26 @@ validate--"FAIL"-->errors--"return error messages to the user"-->create
 validate--"SUCCEED"-->make_post
 make_post-->make_tag-->sync_pt-->home
 ```
+
+
+Cheatsheet:
+
+example swal push:
+```
+Swal.fire({
+                title: 'Delete "{{ $post->title }}"?',
+                text: "Are you sure you want to delete this post? You won't be able to revert this action!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#FF6666',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'DELETE'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success')
+                return true;
+            }});
+```
