@@ -1,4 +1,4 @@
-@extends('base_wnav', ['stitle' => 'New Post'])
+@extends('base_wnav', ['stitle' => 'Edit Post'])
 
 
 @section('body')

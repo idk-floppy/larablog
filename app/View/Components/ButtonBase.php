@@ -4,14 +4,16 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class DeleteModal extends Component
+class ButtonBase extends Component
 {
-    public $object;
-    public $type;
-    public function __construct($object, $type)
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $this->object = $object;
-        $this->type = $type;
+        //
     }
 
     /**
@@ -21,6 +23,6 @@ class DeleteModal extends Component
      */
     public function render()
     {
-        return view('components.delete-modal');
+        return view('components.button-base');
     }
 }

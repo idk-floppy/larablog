@@ -21,14 +21,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::query()->with('tags')->when(request('q'), function ($q) {
+        $posts = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'created_at AS created_at')->with('tags')->when(request('q'), function ($q) {
             return $q->searchMain(request('q'));
         });
         return view('homepage', [
             'posts' => $posts->newestFirst()->paginate(12)
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -64,6 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'created_at AS created_at')->find($post->id);
         $Parsedown = new Parsedown();
         $safeContent = $Parsedown->text($post->content);
 

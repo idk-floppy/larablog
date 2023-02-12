@@ -17,9 +17,20 @@
                     <x-nav-item href="{{ route('blog.create') }}">New post</x-nav-item>
                 @endif
                 @if (Route::has('admin.listPosts'))
-                    <x-nav-item href="{{ route('admin.listPosts') }}">Admin</x-nav-item>
+                    <x-nav-item href="{{ route('admin.listPosts') }}">Posts</x-nav-item>
+                @endif
+                @if (Route::has('admin.listTags'))
+                    <x-nav-item href="{{ route('admin.listTags') }}">Tags</x-nav-item>
                 @endif
             </div>
         </div>
     </div>
 </nav>
+
+@push('scripts')
+    <script type="module">
+        burger.on('click', () => {
+            navlinks.toggleClass(['hidden', 'flex']);
+        });
+    </script>
+@endpush

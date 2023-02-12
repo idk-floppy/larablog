@@ -6,41 +6,36 @@
         <x-searchbar />
     </x-block>
     <x-block>
-        <table id="adminTable" class="table-auto border-separate border border-slate-300  w-auto">
+        <table id="adminTable" class="table-auto border-separate border border-slate-300  w-full">
             <thead>
                 <tr>
                     <th class="border border-slate-300 font-semibold p-2 text-slate-900 text-left">
-                        Edit</th>
-                    <th class="border border-slate-300 font-semibold p-2 text-slate-900 text-left">
                         Delete</th>
                     <th class="border border-slate-300 font-semibold p-2 text-slate-900 text-left">
-                        Title</th>
+                        Edit</th>
                     <th class="border border-slate-300 font-semibold p-2 text-slate-900 text-left">
-                        Published at</th>
+                        Text</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($posts as $post)
+                @foreach ($tags as $tag)
                     <tr>
                         <td class="border border-slate-300 p-2 text-slate-500">
-                            <x-delete-modal type="blog" :object="$post" />
+                            <x-delete-modal type="admin" :object="$tag" />
                         </td>
                         <td class="border border-slate-300 p-2 text-slate-500">
-                            <x-edit-button type="blog" :object="$post" />
+                            <x-edit-button type="admin" :object="$tag" />
                         </td>
                         <td class="border border-slate-300 p-2 text-slate-500">
-                            <a href="{{ route('blog.show', $post->id) }}">{{ $post->text }}</a>
-                        </td>
-                        <td class="border border-slate-300 p-2 text-slate-500 italic">
-                            <small>{{ $post->created_at->format('Y-m-d H:i') }}</small>
+                            <a href="{{ route('blog.show', $tag->id) }}">{{ $tag->text }}</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="flex justify-between align-baseline w-full my-2 px-2">
-            <div>Showing {{ $posts->firstItem() }} - {{ $posts->lastItem() }} of {{ $posts->total() }}</div>
-            <div>{{ $posts->appends($_GET)->links() }}</div>
+            <div>Showing {{ $tags->firstItem() }} - {{ $tags->lastItem() }} of {{ $tags->total() }}</div>
+            <div>{{ $tags->appends($_GET)->links() }}</div>
         </div>
     </x-block>
 @endsection

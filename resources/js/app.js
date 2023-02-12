@@ -7,19 +7,13 @@ import EasyMDE from 'easymde';
 window.EasyMDE = EasyMDE;
 import Swal from 'sweetalert2';
 window.Swal = Swal;
+import DataTables from 'datatables.net-dt';
+window.DataTables = DataTables;
 
 // Navbar
 var navlinks = $('#navlinks');
+window.navlinks = navlinks;
 var burger = $('#burger');
-burger.on('click', () => {
-    navlinks.toggleClass(['hidden', 'flex']);
-});
+window.burger = burger;
 
 select2();
-
-$('#delete').on('click', () => {
-    $('#dialog').show();
-});
-$('#cancel').on('click', () => {
-    $('#dialog').hide();
-});

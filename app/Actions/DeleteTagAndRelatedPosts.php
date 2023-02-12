@@ -2,20 +2,22 @@
 
 namespace App\Actions;
 
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
-class CreatePostAction
+class DeleteTagAndRelatedPosts
 {
-    public function handle(Request $request)
+    public function handle(Tag $tag)
     {
         DB::beginTransaction();
         try {
+            $tag->posts()->sync([]);
+            $tag->delete();
         } catch (\Throwable $th) {
             DB::rollBack();
-            return array('success' => false, 'msg' => response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500));
+            return response()->json(['message' => 'Something went wrong...', 'success' => false]);
         }
         DB::commit();
-
-        return array('success' => true, 'msg' => 'success message');
+        return response()->json(['message' => 'Tag successfully deleted!', 'url' => route('blog.home'), 'success' => true]);
     }
 }
