@@ -10,15 +10,19 @@ run `clean.bat`, so it automatically runs the needed commands.
 
 Copy `env.example` and rename it to `.env`
 
-Run `composer install` and `npm install`.
+run (in order):
+1. composer install
+2. npm install
+3. php artisan cache:clear
+4. php artisan key:generate
+5. php artisan route:clear
+6. php artisan migrate:fresh
+7. php artisan storage:link
 
-`npm run build` or optionally `npm run dev` with vite, or `npm run watch` with mix
+then:
+1. npm run dev / npm run build
+2. php artisan serve
 
-`php artisan migrate:fresh` to get the database up and running. use the `--seed` argument to seed the database with posts, tags and fill their pivot table.
-
-If things seem off, try running the `php artisan cache:clear` and `php artisan optimize:clear` commands.
-
-Generate new key with `php artisan key:generate`
 
 You could also use `CTRL + F5` to refresh the browser.
 
