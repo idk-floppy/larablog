@@ -48,10 +48,10 @@ You could also use `CTRL + F5` to refresh the browser.
   - [x] delete posts
   - [x] modals (dialog+js, later sweetalert maybe?)
 - [x] Tests (some basic tests)
-
+- [x] image upload & delete
 ### POST MVP
 
-- [x] SweetAlert2 (for deletion)
+- [x] SweetAlert2
 - [ ] comment the hell out of it
 - [ ] clean-up
 
@@ -59,5 +59,3 @@ You could also use `CTRL + F5` to refresh the browser.
 
 - [x] css&js upgrade
 - [x] add livewire (doesn't really have a purpose rn)
-- [ ] ~~image upload & delete~~ maybe later
-
