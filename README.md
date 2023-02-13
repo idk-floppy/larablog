@@ -47,9 +47,7 @@ You could also use `CTRL + F5` to refresh the browser.
   - [x] edit posts
   - [x] delete posts
   - [x] modals (dialog+js, later sweetalert maybe?)
-- [ ] Tests
-  - [ ] Unit
-  - [ ] Feature
+- [x] Tests (some basic tests)
 
 ### POST MVP
 
