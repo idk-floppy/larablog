@@ -14,6 +14,7 @@
             </div>
             <hr>
             <div class="font-semibold text-lg">{{ $post->teaser }}</div>
+            <x-post-image image="{{ $post->image }}" />
             <small class="text-sm text-gray-400 italic">Created at {{ $post->created_at->format('Y M d.') }}</small>
             <hr>
             <div class="md:px-2 text-justify text-base leading-relaxed">{!! $content !!}</div>
@@ -21,6 +22,7 @@
                 <hr class="my-2 border-gray-300">
                 <x-edit-button type="blog" :object="$post" />
                 <x-delete-modal type="blog" :object="$post" />
+                <x-remove-image-from-post-component :object="$post" />
             </div>
         </div>
     </x-block>

@@ -15,3 +15,5 @@ Route::get('/edit/{post}', 'edit')->name('edit');
 Route::post('/update', 'update')->name('update');
 
 Route::post('/delete/{post}', 'destroy')->name('destroy');
+
+Route::post('/delimg/{post}', 'deleteImage')->name('deleteImage');

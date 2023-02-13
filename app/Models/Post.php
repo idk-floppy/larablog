@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use App\Models\Tag;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'teaser', 'content'];
+    protected $fillable = ['title', 'teaser', 'content', 'image'];
 
     public function tags()
     {

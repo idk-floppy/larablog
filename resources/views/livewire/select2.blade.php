@@ -4,20 +4,6 @@
         @foreach ($this->tagOptions as $tagOptions)
             <option value="{{ $tagOptions }}" selected>{{ $tagOptions }}</option>
         @endforeach
-
-        {{-- @if (old('tags'))
-            @foreach (old('tags') as $oldtag)
-                <option value="{{ $oldtag }}" selected>{{ $oldtag }}</option>
-            @endforeach
-        @else
-            @isset($post)
-                @if ($post->tags()->count() > 0)
-                    @foreach ($post->tags as $singleTag)
-                        <option value="{{ $singleTag->text }}" selected>{{ $singleTag->text }}</option>
-                    @endforeach
-                @endif
-            @endisset
-        @endif --}}
     </select>
     @if ($errors->has('tags'))
         <small class="text-red-600">{{ $errors->first('tags') }}</small>
@@ -33,7 +19,7 @@
                 maximumSelectionLength: 5,
                 tokenSeparators: [],
                 ajax: {
-                    delay: 1000,
+                    delay: 300,
                     url: '/api/search',
                     data: (params) => {
                         var query = {

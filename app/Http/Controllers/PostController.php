@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreatePostAction;
 use App\Actions\DeletePostAction;
+use App\Actions\RemoveImageFromPostAction;
 use App\Actions\UpdatePostAction;
 use Parsedown;
 use App\Models\Tag;
@@ -21,7 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'created_at AS created_at')->with('tags')->when(request('q'), function ($q) {
+        $posts = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'image AS image', 'created_at AS created_at')->with('tags')->when(request('q'), function ($q) {
             return $q->searchMain(request('q'));
         });
         return view('homepage', [
@@ -47,7 +48,6 @@ class PostController extends Controller
     public function store(PostFormValidation $request, CreatePostAction $action)
     {
         $response = $action->handle($request);
-
         if ($response['success']) {
             return redirect(route('blog.show', $response['msg']->id))->with('success', 'Post created successfully');
         } else {
@@ -63,7 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'created_at AS created_at')->find($post->id);
+        $post = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'image AS image', 'created_at AS created_at')->find($post->id);
         $Parsedown = new Parsedown();
         $safeContent = $Parsedown->text($post->content);
 
@@ -114,5 +114,10 @@ class PostController extends Controller
     {
         $response = $action->handle($post);
         return response()->json(['success' => 'Post successfully deleted!', 'url' => route('blog.home')]);
+    }
+
+    public function deleteImage(Post $post, RemoveImageFromPostAction $action)
+    {
+        return $action->handle($post);
     }
 }

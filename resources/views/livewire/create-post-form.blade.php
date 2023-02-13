@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('blog.store') }}">
+<form method="post" action="{{ route('blog.store') }}" enctype="multipart/form-data">
     @if ($errors->any())
         <div class="p-4 w-full block rounded-md bg-white">
             <ul>
@@ -13,6 +13,9 @@
     <x-label name="teaser" label="teaser" />
     <x-text-input-field name="teaser" id="teaser" label="Teaser" pholder="Catchy teaser">
     </x-text-input-field>
+    <x-label name="image" label="image" />
+    <input type="file" name="image" id="image" placeholder="Select an image"
+        class="mt-1 w-full block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
     <x-label name="content" label="content" />
     <livewire:text-editor :text="old('content') ?? ''" tid="content" />
     <x-label name="tags" label="tags" />

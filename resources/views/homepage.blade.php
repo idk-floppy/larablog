@@ -9,6 +9,7 @@
         @forelse ($posts as $post)
             <x-block class="flex flex-col justify-between">
                 <div>
+                    <x-post-image image="{{ $post->image }}" />
                     <x-post-title :url="route('blog.show', $post->id)">{{ $post->text }}</x-post-title>
                     <small class="text-sm text-gray-400 italic">{{ $post->created_at->format('Y-m-d H:i') }}</small>
                     <hr>

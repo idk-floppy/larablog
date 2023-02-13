@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PostFormValidation;
+use Illuminate\Support\Arr;
 
 class CreatePostAction
 {
@@ -12,7 +13,12 @@ class CreatePostAction
     {
         DB::beginTransaction();
         try {
-            $newPost = Post::create($request->validated());
+            $dataForNewPost = Arr::except($request->validated(), 'image');
+            if ($request->image != null) {
+                $image = request()->file('image')->store('images');
+                $dataForNewPost['image'] = $image;
+            }
+            $newPost = Post::create($dataForNewPost);
             $newPost->refreshTags($request->tags ?? []);
         } catch (\Throwable $th) {
             DB::rollBack();
