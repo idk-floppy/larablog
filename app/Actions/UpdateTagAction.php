@@ -20,6 +20,6 @@ class UpdateTagAction
         }
         DB::commit();
 
-        return array('success' => true);
+        return array('success' => true, 'msg' => $tagToUpdate->id);
     }
 }

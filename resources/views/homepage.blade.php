@@ -17,7 +17,7 @@
                 </div>
                 <div class="flex space-x-2">
                     @foreach ($post->tags as $tag)
-                        <x-tagpill url="#">{{ $tag->text }}</x-tagpill>
+                        <x-tagpill url="{{ route('admin.show', $tag->id) }}">{{ $tag->text }}</x-tagpill>
                     @endforeach
                 </div>
             </x-block>

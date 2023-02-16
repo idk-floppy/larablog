@@ -30,11 +30,8 @@
                                 'Success',
                                 'Record deleted successfully!',
                                 'success').then(()=>{
-                                    if (window.location.href.indexOf("admin") == -1) {
-                                        window.location.href = redirectToThisURL.url;
-                                    }else{
-                                        window.location.reload();
-                                    }
+                                    console.log(redirectToThisURL.url);
+                                    window.location.href = redirectToThisURL.url;
                                 })},
                         error: ()=>{
                             Swal.fire(

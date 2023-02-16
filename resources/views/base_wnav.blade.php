@@ -25,16 +25,16 @@
                 <h3 class="font-semibold">Useful links</h3>
                 <ul class="pl-2">
                     <li>
-                        <x-nav-item href="https://laravel.com/">Laravel</x-nav-item>
+                        <a class="link" href="https://laravel.com/">Laravel</a>
                     </li>
                     <li>
-                        <x-nav-item href="https://laracasts.com/">Laracasts</x-nav-item>
+                        <a class="link" href="https://laracasts.com/">Laracasts</a>
                     </li>
                     <li>
-                        <x-nav-item href="https://google.com/">Google</x-nav-item>
+                        <a class="link" href="https://google.com/">Google</a>
                     </li>
                     <li>
-                        <x-nav-item href="https://stackoverflow.com/">Stackoverflow</x-nav-item>
+                        <a class="link" href="https://stackoverflow.com/">Stackoverflow</a>
                     </li>
                 </ul>
             </div>

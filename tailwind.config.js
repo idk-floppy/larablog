@@ -4,12 +4,12 @@ module.exports = {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
-      ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-  ],
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/forms'),
+    ],
 }

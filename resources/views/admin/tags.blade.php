@@ -27,7 +27,7 @@
                             <x-edit-button type="admin" :object="$tag" />
                         </td>
                         <td class="border border-slate-300 p-2 text-slate-500">
-                            <a href="{{ route('blog.show', $tag->id) }}">{{ $tag->text }}</a>
+                            <a href="{{ route('admin.show', $tag->id) }}">{{ $tag->text }}</a>
                         </td>
                     </tr>
                 @endforeach

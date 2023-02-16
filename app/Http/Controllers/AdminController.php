@@ -12,6 +12,13 @@ use App\Http\Requests\TagFormValidation;
 
 class AdminController extends Controller
 {
+    public function show(Tag $tag)
+    {
+        $tag = Tag::query()->with('posts')->find($tag->id);
+        return view('tag/show', [
+            'tag' => $tag
+        ]);
+    }
     public function listPosts()
     {
         $posts = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'created_at AS created_at')->when(request('q'), function ($q) {
@@ -45,7 +52,7 @@ class AdminController extends Controller
     {
         $response = $action->handle($request);
         if ($response['success']) {
-            return redirect(route('blog.home'))->with('success', 'Tag updated successfully');
+            return redirect(route('admin.show', $response['msg']))->with('success', 'Tag updated successfully');
         } else {
             return $response['msg'];
         }
