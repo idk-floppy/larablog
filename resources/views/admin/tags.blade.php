@@ -21,7 +21,8 @@
                 @foreach ($tags as $tag)
                     <tr>
                         <td class="border border-slate-300 p-2 text-slate-500">
-                            <x-delete-modal type="admin" :object="$tag" />
+                            <x-delete-modal data-object="{{ $tag }}"
+                                data-url="{{ route('admin.destroy', $tag->id) }}" />
                         </td>
                         <td class="border border-slate-300 p-2 text-slate-500">
                             <x-edit-button type="admin" :object="$tag" />

@@ -3,23 +3,23 @@
 namespace App\Actions;
 
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\TagFormValidation;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Response;
 
 class UpdateTagAction
 {
-    public function handle(TagFormValidation $request)
+    public function handle($request)
     {
-        DB::beginTransaction();
-        try {
-            $tagToUpdate = Tag::find($request->uid);
-            $tagToUpdate->update(['text' => $request->validated('tag')]);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return array('success' => false, 'msg' => response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500));
-        }
-        DB::commit();
-
-        return array('success' => true, 'msg' => $tagToUpdate->id);
+        return DB::transaction(function () use ($request) {
+            try {
+                $tagToUpdate = Tag::find($request->uid);
+                $tagToUpdate->update(['text' => $request->validated('tag')]);
+            } catch (\Throwable $th) {
+                report($th);
+                return response('An error occured.', Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+            return response('OK', Response::HTTP_OK);
+        });
     }
 }

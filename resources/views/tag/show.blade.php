@@ -15,7 +15,7 @@
             </div>
             <div class="mt-4 flex flex-row gap-2">
                 <hr class="my-2 border-gray-300">
-                <x-delete-modal type="admin" :object="$tag" />
+                <x-delete-modal data-object="{{ $tag }}" data-url="{{ route('admin.destroy', $tag->id) }}" />
                 <x-edit-button type="admin" :object="$tag" />
             </div>
         </div>

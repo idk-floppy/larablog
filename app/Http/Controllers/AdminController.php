@@ -9,19 +9,20 @@ use Illuminate\Http\Response;
 use App\Actions\DeleteTagAndRelatedPosts;
 use App\Actions\UpdateTagAction;
 use App\Http\Requests\TagFormValidation;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
     public function show(Tag $tag)
     {
-        $tag = Tag::query()->with('posts')->find($tag->id);
+        $tag->load('posts');
         return view('tag/show', [
             'tag' => $tag
         ]);
     }
     public function listPosts()
     {
-        $posts = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'created_at AS created_at')->when(request('q'), function ($q) {
+        $posts = Post::query()->when(request('q'), function ($q) {
             return $q->searchMain(request('q'));
         });
         return view('admin/posts', [
@@ -40,7 +41,7 @@ class AdminController extends Controller
     public function destroy(Tag $tag, DeleteTagAndRelatedPosts $action)
     {
         $response = $action->handle($tag);
-        return response()->json(['success' => 'Post successfully deleted!', 'url' => route('blog.home')]);
+        return $response;
     }
     public function edit(Tag $tag)
     {
@@ -51,10 +52,6 @@ class AdminController extends Controller
     public function update(TagFormValidation $request, UpdateTagAction $action)
     {
         $response = $action->handle($request);
-        if ($response['success']) {
-            return redirect(route('admin.show', $response['msg']))->with('success', 'Tag updated successfully');
-        } else {
-            return $response['msg'];
-        }
+        return $response;
     }
 }

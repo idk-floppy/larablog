@@ -29,7 +29,7 @@
                             <x-edit-button type="blog" :object="$post" />
                         </td>
                         <td class="border border-slate-300 p-2 text-slate-500">
-                            <a href="{{ route('blog.show', $post->id) }}">{{ $post->text }}</a>
+                            <a href="{{ route('blog.show', $post->id) }}">{{ $post->title }}</a>
                         </td>
                         <td class="border border-slate-300 p-2 text-slate-500 italic">
                             <small>{{ $post->created_at->format('Y-m-d H:i') }}</small>

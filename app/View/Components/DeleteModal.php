@@ -6,12 +6,8 @@ use Illuminate\View\Component;
 
 class DeleteModal extends Component
 {
-    public $object;
-    public $type;
-    public function __construct($object, $type)
+    public function __construct()
     {
-        $this->object = $object;
-        $this->type = $type;
     }
 
     /**

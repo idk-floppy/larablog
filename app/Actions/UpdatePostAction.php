@@ -5,28 +5,28 @@ namespace App\Actions;
 use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\PostFormValidation;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Response;
 
 class UpdatePostAction
 {
-    public function handle(PostFormValidation $request)
+    public function handle($request)
     {
-        DB::beginTransaction();
-        try {
-            $dataForPostToUpdate = Arr::except($request->validated(), 'image');
-            if ($request->image != null) {
-                $image = request()->file('image')->store('images');
-                $dataForPostToUpdate['image'] = $image;
+        return DB::transaction(function ()  use ($request) {
+            try {
+                $dataForPostToUpdate = Arr::except($request->validated(), 'image');
+                if ($request->image != null) {
+                    $image = request()->file('image')->store('images');
+                    $dataForPostToUpdate['image'] = $image;
+                }
+                $postToUpdate = Post::find($request->uid);
+                $postToUpdate->update($dataForPostToUpdate);
+                $postToUpdate->refreshTags($request->tags ?? []);
+            } catch (\Throwable $th) {
+                report($th);
+                return response('An error occured.', Response::HTTP_INTERNAL_SERVER_ERROR);
             }
-            $postToUpdate = Post::find($request->uid);
-            $postToUpdate->update($dataForPostToUpdate);
-            $postToUpdate->refreshTags($request->tags ?? []);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return array('success' => false, 'msg' => response("<p><strong>Something went wrong... Please send this information to the administrator:</strong></p>\n\n" . $th, 500));
-        }
-        DB::commit();
-
-        return array('success' => true, 'msg' => $postToUpdate);
+            return response('OK', Response::HTTP_OK);
+        });
     }
 }

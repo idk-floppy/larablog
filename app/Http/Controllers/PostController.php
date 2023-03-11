@@ -22,9 +22,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::query()->select('id AS id', 'title AS text', 'teaser AS teaser', 'content AS content', 'image AS image', 'created_at AS created_at')->with('tags')->when(request('q'), function ($q) {
+        $posts = Post::query()->with('tags')->when(request('q'), function ($q) {
             return $q->searchMain(request('q'));
         });
+        $posts->text = $posts->title;
         return view('homepage', [
             'posts' => $posts->newestFirst()->paginate(12)
         ]);
@@ -97,11 +98,7 @@ class PostController extends Controller
     {
         $response = $action->handle($request);
 
-        if ($response['success']) {
-            return redirect(route('blog.show', $response['msg']->id))->with('success', 'Post updated successfully');
-        } else {
-            return $response['msg'];
-        }
+        return $response;
     }
 
     /**

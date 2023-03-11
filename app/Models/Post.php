@@ -38,7 +38,7 @@ class Post extends Model
                 $this->tags()->attach($preferredTags); // attach the preferred tags
             }
         } catch (\Throwable $th) {
-            throw $th;
+            report($th);
         }
     }
 }
